@@ -11,6 +11,9 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data })
 }
 
+// Since this handles a type of FETCH_USER, every time this executes,
+// the user will be updated, and any component that takes the user as a
+// prop will be automatically updated.
 export const handleToken = (token) => async dispatch => {
   const res = await axios.post("/api/stripe", token)
   dispatch({ type: FETCH_USER, payload: res.data })

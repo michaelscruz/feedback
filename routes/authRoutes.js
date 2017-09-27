@@ -1,3 +1,5 @@
+// This is essentially a controller that handles authentication-related requests
+
 const passport = require("passport")
 
 module.exports = app => {
