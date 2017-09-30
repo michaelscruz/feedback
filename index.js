@@ -25,5 +25,19 @@ app.use(passport.session())
 require("./routes/authRoutes")(app)
 require("./routes/billingRoutes")(app)
 
+if (process.env.NODE_ENV === "production") {
+  // Make sure express will serve production assets, like main.js
+  // In the code below, express will look in client/build for the exact
+  // file requested. If not found, it will fall through and execute the
+  // get route below to serve index.html
+  app.use(express.static("client/build"))
+
+  // Express will serve index.html if it doesn't recognize the route
+  const path = require("path")
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  })
+}
+
 const PORT = process.env.PORT || 5000
 app.listen(PORT)
